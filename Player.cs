@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private HealthBar _healthBar;
-
-    private float _currentHealth;
-
     private const float _step = 10;
     private const float _minHealth = 0;
     private const float _maxHealth = 100;
 
-    private void Start()
-    {
-        _currentHealth = 100;
-    }
+    public delegate void ChangeHealth(float health, float step);
+    public static event ChangeHealth OnHealthChange;
+
+    private float _currentHealth;
 
     public void DealDamage()
     {
         if (_currentHealth != _minHealth)
         {
             _currentHealth -= _step;
-            _healthBar.ChangeHeath(_currentHealth, _step);
+            OnHealthChange?.Invoke(_currentHealth, _step);
         }
     }
 
@@ -31,7 +27,12 @@ public class Player : MonoBehaviour
         if (_currentHealth != _maxHealth)
         {
             _currentHealth += _step;
-            _healthBar.ChangeHeath(_currentHealth, _step);
+            OnHealthChange?.Invoke(_currentHealth, _step);
         }
+    }
+
+    private void Start()
+    {
+        _currentHealth = _maxHealth;
     }
 }

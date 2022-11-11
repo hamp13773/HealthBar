@@ -11,4 +11,14 @@ public class HealthBar : MonoBehaviour
     {
         _slider.value = Mathf.MoveTowards(_slider.value, target, step);
     }
+
+    private void OnEnable()
+    {
+        Player.OnHealthChange += ChangeHeath;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnHealthChange -= ChangeHeath;
+    }
 }
