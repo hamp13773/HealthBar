@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const float _step = 10;
-    private const float _minHealth = 0;
-    private const float _maxHealth = 100;
+    private const float Step = 10;
+    private const float MinHealth = 0;
+    private const float MaxHealth = 100;
 
     public delegate void ChangeHealth(float health, float step);
     public static event ChangeHealth OnHealthChange;
@@ -15,24 +15,24 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = MaxHealth;
     }
 
     public void DealDamage()
     {
-        if (_currentHealth != _minHealth)
+        if (_currentHealth != MinHealth)
         {
-            _currentHealth -= _step;
-            OnHealthChange?.Invoke(_currentHealth, _step);
+            _currentHealth -= Step;
+            OnHealthChange?.Invoke(_currentHealth, Step);
         }
     }
 
     public void HealDamage()
     {
-        if (_currentHealth != _maxHealth)
+        if (_currentHealth != MaxHealth)
         {
-            _currentHealth += _step;
-            OnHealthChange?.Invoke(_currentHealth, _step);
+            _currentHealth += Step;
+            OnHealthChange?.Invoke(_currentHealth, Step);
         }
     }
 }
