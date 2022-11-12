@@ -13,6 +13,11 @@ public class Player : MonoBehaviour
 
     private float _currentHealth;
 
+    private void Start()
+    {
+        _currentHealth = _maxHealth;
+    }
+
     public void DealDamage()
     {
         if (_currentHealth != _minHealth)
@@ -29,10 +34,5 @@ public class Player : MonoBehaviour
             _currentHealth += _step;
             OnHealthChange?.Invoke(_currentHealth, _step);
         }
-    }
-
-    private void Start()
-    {
-        _currentHealth = _maxHealth;
     }
 }

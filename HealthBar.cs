@@ -7,11 +7,6 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
 
-    public void ChangeHeath(float target, float step)
-    {
-        _slider.value = Mathf.MoveTowards(_slider.value, target, step);
-    }
-
     private void OnEnable()
     {
         Player.OnHealthChange += ChangeHeath;
@@ -20,5 +15,10 @@ public class HealthBar : MonoBehaviour
     private void OnDisable()
     {
         Player.OnHealthChange -= ChangeHeath;
+    }
+
+    public void ChangeHeath(float target, float step)
+    {
+        _slider.value = Mathf.MoveTowards(_slider.value, target, step);
     }
 }
